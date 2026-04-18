@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GestorArt
 {
-    public partial class frm2 : Form
+    public partial class frmEliminar : Form
     {
-        public frm2()
+        public frmEliminar()
         {
             InitializeComponent();
         }
