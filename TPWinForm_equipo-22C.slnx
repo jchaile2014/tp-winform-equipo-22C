@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="GestorArt/GestorArt.csproj" Id="b943dda4-2a88-4eec-bcc1-9c2bc7d864ed" />
+  <Project Path="dominio/dominio.csproj" />
+  <Project Path="negocio/negocio.csproj" />
+  <Project Path="aplicacion-winform/GestorArt.csproj" Id="b943dda4-2a88-4eec-bcc1-9c2bc7d864ed" />
 </Solution>

@@ -1,16 +1,9 @@
-﻿namespace GestorArt
+namespace GestorArt
 {
     partial class frmPrincipal
     {
-        /// <summary>
-        /// Variable del diseñador necesaria.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Limpiar los recursos que se estén usando.
-        /// </summary>
-        /// <param name="disposing">true si los recursos administrados se deben desechar; false en caso contrario.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +15,6 @@
 
         #region Código generado por el Diseñador de Windows Forms
 
-        /// <summary>
-        /// Método necesario para admitir el Diseñador. No se puede modificar
-        /// el contenido de este método con el editor de código.
-        /// </summary>
         private void InitializeComponent()
         {
             this.menuStripPrincipal = new System.Windows.Forms.MenuStrip();
@@ -33,8 +22,6 @@
             this.articulosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarArtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modificarArtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminarArtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripPrincipal.SuspendLayout();
             this.SuspendLayout();
@@ -70,9 +57,7 @@
             // opcionesToolStripMenuItem
             // 
             this.opcionesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.agregarArtToolStripMenuItem,
-            this.modificarArtToolStripMenuItem,
-            this.eliminarArtToolStripMenuItem});
+            this.agregarArtToolStripMenuItem});
             this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
             this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.opcionesToolStripMenuItem.Text = "Opciones";
@@ -84,22 +69,7 @@
             this.agregarArtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.agregarArtToolStripMenuItem.Text = "Agregar Art";
             this.agregarArtToolStripMenuItem.Click += new System.EventHandler(this.agregarArtToolStripMenuItem_Click);
-            // 
-            // modificarArtToolStripMenuItem
-            // 
-            this.modificarArtToolStripMenuItem.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.modificarArtToolStripMenuItem.Name = "modificarArtToolStripMenuItem";
-            this.modificarArtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.modificarArtToolStripMenuItem.Text = "Modificar Art";
-            this.modificarArtToolStripMenuItem.Click += new System.EventHandler(this.modificarArtToolStripMenuItem_Click);
-            // 
-            // eliminarArtToolStripMenuItem
-            // 
-            this.eliminarArtToolStripMenuItem.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.eliminarArtToolStripMenuItem.Name = "eliminarArtToolStripMenuItem";
-            this.eliminarArtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.eliminarArtToolStripMenuItem.Text = "Eliminar Art";
-            this.eliminarArtToolStripMenuItem.Click += new System.EventHandler(this.eliminarArtToolStripMenuItem_Click);
+
             // 
             // salirToolStripMenuItem
             // 
@@ -112,9 +82,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(894, 609);
+            this.ClientSize = new System.Drawing.Size(1024, 680);
             this.Controls.Add(this.menuStripPrincipal);
-            this.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStripPrincipal;
@@ -137,8 +107,8 @@
         private System.Windows.Forms.ToolStripMenuItem opcionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem agregarArtToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem modificarArtToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eliminarArtToolStripMenuItem;
+
     }
 }
+
 
