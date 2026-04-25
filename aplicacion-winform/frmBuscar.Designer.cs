@@ -20,6 +20,8 @@ namespace GestorArt
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
             this.lblCampo = new System.Windows.Forms.Label();
             this.cboCampo = new System.Windows.Forms.ComboBox();
+            this.lblCriterio = new System.Windows.Forms.Label();
+            this.cboCriterio = new System.Windows.Forms.ComboBox();
             this.lblFiltro = new System.Windows.Forms.Label();
             this.txtFiltro = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -42,9 +44,9 @@ namespace GestorArt
             this.lblCampo.AutoSize = true;
             this.lblCampo.Location = new System.Drawing.Point(12, 15);
             this.lblCampo.Name = "lblCampo";
-            this.lblCampo.Size = new System.Drawing.Size(32, 13);
+            this.lblCampo.Size = new System.Drawing.Size(43, 13);
             this.lblCampo.TabIndex = 1;
-            this.lblCampo.Text = "Filtro:";
+            this.lblCampo.Text = "Campo:";
             // 
             // cboCampo
             // 
@@ -54,33 +56,51 @@ namespace GestorArt
             this.cboCampo.Name = "cboCampo";
             this.cboCampo.Size = new System.Drawing.Size(121, 21);
             this.cboCampo.TabIndex = 2;
+            this.cboCampo.SelectedIndexChanged += new System.EventHandler(this.cboCampo_SelectedIndexChanged);
+            // 
+            // lblCriterio
+            // 
+            this.lblCriterio.AutoSize = true;
+            this.lblCriterio.Location = new System.Drawing.Point(198, 15);
+            this.lblCriterio.Name = "lblCriterio";
+            this.lblCriterio.Size = new System.Drawing.Size(42, 13);
+            this.lblCriterio.TabIndex = 3;
+            this.lblCriterio.Text = "Criterio:";
+            // 
+            // cboCriterio
+            // 
+            this.cboCriterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCriterio.FormattingEnabled = true;
+            this.cboCriterio.Location = new System.Drawing.Point(250, 12);
+            this.cboCriterio.Name = "cboCriterio";
+            this.cboCriterio.Size = new System.Drawing.Size(121, 21);
+            this.cboCriterio.TabIndex = 4;
             // 
             // lblFiltro
             // 
             this.lblFiltro.AutoSize = true;
-            this.lblFiltro.Location = new System.Drawing.Point(198, 15);
+            this.lblFiltro.Location = new System.Drawing.Point(387, 15);
             this.lblFiltro.Name = "lblFiltro";
-            this.lblFiltro.Size = new System.Drawing.Size(43, 13);
+            this.lblFiltro.Size = new System.Drawing.Size(32, 13);
             this.lblFiltro.TabIndex = 5;
-            this.lblFiltro.Text = "Detalle:";
+            this.lblFiltro.Text = "Filtro:";
             // 
             // txtFiltro
             // 
-            this.txtFiltro.Location = new System.Drawing.Point(236, 12);
+            this.txtFiltro.Location = new System.Drawing.Point(430, 12);
             this.txtFiltro.Name = "txtFiltro";
             this.txtFiltro.Size = new System.Drawing.Size(170, 20);
             this.txtFiltro.TabIndex = 6;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(447, 10);
+            this.btnBuscar.Location = new System.Drawing.Point(616, 10);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 7;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
             // 
             // btnDetalle
             // 
@@ -102,6 +122,8 @@ namespace GestorArt
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtFiltro);
             this.Controls.Add(this.lblFiltro);
+            this.Controls.Add(this.cboCriterio);
+            this.Controls.Add(this.lblCriterio);
             this.Controls.Add(this.cboCampo);
             this.Controls.Add(this.lblCampo);
             this.Controls.Add(this.dgvArticulos);
@@ -113,6 +135,7 @@ namespace GestorArt
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
@@ -120,10 +143,11 @@ namespace GestorArt
         private System.Windows.Forms.DataGridView dgvArticulos;
         private System.Windows.Forms.Label lblCampo;
         private System.Windows.Forms.ComboBox cboCampo;
+        private System.Windows.Forms.Label lblCriterio;
+        private System.Windows.Forms.ComboBox cboCriterio;
         private System.Windows.Forms.Label lblFiltro;
         private System.Windows.Forms.TextBox txtFiltro;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnDetalle;
     }
 }
-

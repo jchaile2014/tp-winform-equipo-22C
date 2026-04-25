@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
 
 namespace GestorArt
@@ -22,7 +20,6 @@ namespace GestorArt
             frmBuscar ventanaBuscar = new frmBuscar();
             ventanaBuscar.MdiParent = this;
             ventanaBuscar.Show();
-
         }
 
         private void articulosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -37,19 +34,29 @@ namespace GestorArt
             ventanaListado.Show();
         }
 
-        private void agregarArtToolStripMenuItem_Click(object sender, EventArgs e)
+        private void marcasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             foreach (var item in Application.OpenForms)
             {
-                if (item.GetType() == typeof(frmAgregar))
+                if (item.GetType() == typeof(frmGestionMarcas))
                     return;
             }
-            frmAgregar ventanaAgregar = new frmAgregar();
-            ventanaAgregar.MdiParent = this;
-            ventanaAgregar.Show();
+            frmGestionMarcas ventanaMarcas = new frmGestionMarcas();
+            ventanaMarcas.MdiParent = this;
+            ventanaMarcas.Show();
         }
 
-
+        private void categoriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var item in Application.OpenForms)
+            {
+                if (item.GetType() == typeof(frmGestionCategorias))
+                    return;
+            }
+            frmGestionCategorias ventanaCategorias = new frmGestionCategorias();
+            ventanaCategorias.MdiParent = this;
+            ventanaCategorias.Show();
+        }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -57,4 +64,3 @@ namespace GestorArt
         }
     }
 }
-

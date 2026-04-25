@@ -53,14 +53,12 @@
     <Compile Include="frmAgregar.Designer.cs">
       <DependentUpon>frmAgregar.cs</DependentUpon>
     </Compile>
-
     <Compile Include="frmListado.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmListado.Designer.cs">
       <DependentUpon>frmListado.cs</DependentUpon>
     </Compile>
-
     <Compile Include="frmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,8 +71,19 @@
     <Compile Include="frmBuscar.Designer.cs">
       <DependentUpon>frmBuscar.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmGestionMarcas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGestionMarcas.Designer.cs">
+      <DependentUpon>frmGestionMarcas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmGestionCategorias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGestionCategorias.Designer.cs">
+      <DependentUpon>frmGestionCategorias.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
-
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAgregar.resx">
       <DependentUpon>frmAgregar.cs</DependentUpon>
@@ -82,11 +91,15 @@
     <EmbeddedResource Include="frmBuscar.resx">
       <DependentUpon>frmBuscar.cs</DependentUpon>
     </EmbeddedResource>
-
+    <EmbeddedResource Include="frmGestionCategorias.resx">
+      <DependentUpon>frmGestionCategorias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGestionMarcas.resx">
+      <DependentUpon>frmGestionMarcas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </EmbeddedResource>

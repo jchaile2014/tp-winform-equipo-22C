@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
+using GestorArt.Dominio;
 
 namespace GestorArt
 {
@@ -29,6 +29,8 @@ namespace GestorArt
                 cboCategoria.Enabled = false;
                 txtPrecio.ReadOnly = true;
                 txtImagenUrl.ReadOnly = true;
+                btnAgregarImagen.Visible = false;
+                btnQuitarImagen.Visible = false;
                 btnAceptar.Visible = false;
                 btnCancelar.Text = "Cerrar";
             }
@@ -55,13 +57,19 @@ namespace GestorArt
                     txtNombre.Text = articulo.Nombre;
                     txtDescripcion.Text = articulo.Descripcion;
                     txtPrecio.Text = articulo.Precio.ToString();
-                    if (articulo.Imagenes.Count > 0)
-                        txtImagenUrl.Text = articulo.Imagenes[0].ImagenUrl;
-                    
-                    cargarImagen(txtImagenUrl.Text);
 
                     cboMarca.SelectedValue = articulo.Marca.Id;
                     cboCategoria.SelectedValue = articulo.Categoria.Id;
+
+                    foreach (Imagen img in articulo.Imagenes)
+                    {
+                        lbxImagenes.Items.Add(img.ImagenUrl);
+                    }
+
+                    if (lbxImagenes.Items.Count > 0)
+                    {
+                        lbxImagenes.SelectedIndex = 0;
+                    }
                 }
             }
             catch (Exception ex)
@@ -95,10 +103,13 @@ namespace GestorArt
                     return;
                 }
 
-                // Imagen
-                if (articulo.Imagenes.Count == 0)
-                    articulo.Imagenes.Add(new Dominio.Imagen());
-                articulo.Imagenes[0].ImagenUrl = txtImagenUrl.Text;
+                articulo.Imagenes.Clear();
+                foreach (string url in lbxImagenes.Items)
+                {
+                    Imagen img = new Imagen();
+                    img.ImagenUrl = url;
+                    articulo.Imagenes.Add(img);
+                }
 
                 if (articulo.Id != 0)
                 {
@@ -124,9 +135,39 @@ namespace GestorArt
             Close();
         }
 
-        private void txtImagenUrl_Leave(object sender, EventArgs e)
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
         {
-            cargarImagen(txtImagenUrl.Text);
+            if (!string.IsNullOrWhiteSpace(txtImagenUrl.Text))
+            {
+                lbxImagenes.Items.Add(txtImagenUrl.Text);
+                txtImagenUrl.Text = "";
+                lbxImagenes.SelectedIndex = lbxImagenes.Items.Count - 1;
+            }
+        }
+
+        private void btnQuitarImagen_Click(object sender, EventArgs e)
+        {
+            if (lbxImagenes.SelectedIndex != -1)
+            {
+                lbxImagenes.Items.RemoveAt(lbxImagenes.SelectedIndex);
+                if (lbxImagenes.Items.Count > 0)
+                {
+                    lbxImagenes.SelectedIndex = 0;
+                }
+                else
+                {
+                    pbxImagen.Image = null;
+                }
+            }
+        }
+
+        private void lbxImagenes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbxImagenes.SelectedIndex != -1)
+            {
+                string url = lbxImagenes.SelectedItem.ToString();
+                cargarImagen(url);
+            }
         }
 
         private void cargarImagen(string imagen)
@@ -149,10 +190,9 @@ namespace GestorArt
                     pbxImagen.Image = System.Drawing.Image.FromStream(stream);
                     stream.Close();
                 } catch {
-                    pbxImagen.Image = null; // Falla total de red
+                    pbxImagen.Image = null;
                 }
             }
         }
     }
 }
-

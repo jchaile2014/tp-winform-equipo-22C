@@ -8,6 +8,7 @@ namespace GestorArt
     public partial class frmListado : Form
     {
         private List<Dominio.Articulo> listaArticulos;
+        private int indiceImagenActual = 0;
 
         public frmListado()
         {
@@ -17,7 +18,6 @@ namespace GestorArt
         private void frmListado_Load(object sender, EventArgs e)
         {
             dgvArticulos.DataError += delegate (object s, DataGridViewDataErrorEventArgs ev) {
-                // Prevenir crasheos por columnas generadas automáticamente que intenten parsear formatos complejos
                 ev.ThrowException = false;
             };
             cargar();
@@ -34,7 +34,8 @@ namespace GestorArt
                 
                 if (listaArticulos.Count > 0)
                 {
-                    cargarImagen(listaArticulos[0].Imagenes.Count > 0 ? listaArticulos[0].Imagenes[0].ImagenUrl : "");
+                    indiceImagenActual = 0;
+                    cargarImagenActual();
                 }
             }
             catch (Exception ex)
@@ -47,8 +48,6 @@ namespace GestorArt
         {
             if(dgvArticulos.Columns.Contains("Id"))
                 dgvArticulos.Columns["Id"].Visible = false;
-            if(dgvArticulos.Columns.Contains("Descripcion"))
-                dgvArticulos.Columns["Descripcion"].Visible = false;
             if(dgvArticulos.Columns.Contains("Imagenes"))
                 dgvArticulos.Columns["Imagenes"].Visible = false;
                 
@@ -60,9 +59,40 @@ namespace GestorArt
         {
             if (dgvArticulos.CurrentRow != null)
             {
-                Dominio.Articulo seleccionado = (Dominio.Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-                cargarImagen(seleccionado.Imagenes.Count > 0 ? seleccionado.Imagenes[0].ImagenUrl : "");
+                indiceImagenActual = 0;
+                cargarImagenActual();
             }
+        }
+
+        private void cargarImagenActual()
+        {
+            if (dgvArticulos.CurrentRow != null)
+            {
+                Dominio.Articulo seleccionado = (Dominio.Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                if (seleccionado.Imagenes.Count > 0)
+                {
+                    if (indiceImagenActual < 0) indiceImagenActual = seleccionado.Imagenes.Count - 1;
+                    if (indiceImagenActual >= seleccionado.Imagenes.Count) indiceImagenActual = 0;
+
+                    cargarImagen(seleccionado.Imagenes[indiceImagenActual].ImagenUrl);
+                }
+                else
+                {
+                    cargarImagen("");
+                }
+            }
+        }
+
+        private void btnAnteriorImagen_Click(object sender, EventArgs e)
+        {
+            indiceImagenActual--;
+            cargarImagenActual();
+        }
+
+        private void btnSiguienteImagen_Click(object sender, EventArgs e)
+        {
+            indiceImagenActual++;
+            cargarImagenActual();
         }
 
         private void cargarImagen(string imagen)
@@ -85,7 +115,7 @@ namespace GestorArt
                     pbxArticulo.Image = System.Drawing.Image.FromStream(stream);
                     stream.Close();
                 } catch {
-                    pbxArticulo.Image = null; // Falla total de red
+                    pbxArticulo.Image = null;
                 }
             }
         }
@@ -139,7 +169,5 @@ namespace GestorArt
                 MessageBox.Show(ex.ToString());
             }
         }
-
     }
 }
-

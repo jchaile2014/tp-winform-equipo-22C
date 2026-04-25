@@ -20,6 +20,7 @@ namespace GestorArt.Negocio
                 {
                     Articulo aux = new Articulo();
                     aux.Id = (int)datos.Lector["Id"];
+                    
                     if (!(datos.Lector["Codigo"] is DBNull)) aux.Codigo = (string)datos.Lector["Codigo"];
                     if (!(datos.Lector["Nombre"] is DBNull)) aux.Nombre = (string)datos.Lector["Nombre"];
                     if (!(datos.Lector["Descripcion"] is DBNull)) aux.Descripcion = (string)datos.Lector["Descripcion"];
@@ -49,7 +50,6 @@ namespace GestorArt.Negocio
                 datos.cerrarConexion();
             }
 
-            // Cargar imagenes
             foreach (Articulo art in lista)
             {
                 AccesoDatos datosImg = new AccesoDatos();
@@ -58,12 +58,14 @@ namespace GestorArt.Negocio
                     datosImg.setearConsulta("SELECT Id, IdArticulo, ImagenUrl FROM IMAGENES WHERE IdArticulo = @IdArticulo");
                     datosImg.setearParametro("@IdArticulo", art.Id);
                     datosImg.ejecutarLectura();
+                    
                     while (datosImg.Lector.Read())
                     {
                         Imagen img = new Imagen();
                         img.Id = (int)datosImg.Lector["Id"];
                         img.IdArticulo = (int)datosImg.Lector["IdArticulo"];
                         img.ImagenUrl = (string)datosImg.Lector["ImagenUrl"];
+                        
                         art.Imagenes.Add(img);
                     }
                 }
@@ -130,8 +132,6 @@ namespace GestorArt.Negocio
                 datos.setearParametro("@id", art.Id);
                 datos.ejecutarAccion();
 
-                // Para actualizar imagenes simplemente borramos las anteriores y metemos las nuevas, pero por ahora solo el requerimiento básico.
-                // Podríamos requerir otra query para borrar y reinsertar las fotos.
                 AccesoDatos datosBorrarImg = new AccesoDatos();
                 datosBorrarImg.setearConsulta("DELETE FROM IMAGENES WHERE IdArticulo = @idArticulo");
                 datosBorrarImg.setearParametro("@idArticulo", art.Id);
@@ -147,7 +147,6 @@ namespace GestorArt.Negocio
                     datosImg.ejecutarAccion();
                     datosImg.cerrarConexion();
                 }
-
             }
             catch (Exception ex)
             {
@@ -161,7 +160,6 @@ namespace GestorArt.Negocio
 
         public void eliminar(int id)
         {
-            // Primero borrar la referencia en IMAGENES por foreign key (o hacerlo desde DB con on cascade)
             AccesoDatos datosImg = new AccesoDatos();
             try
             {
@@ -197,12 +195,12 @@ namespace GestorArt.Negocio
 
         public List<Articulo> filtrar(string campo, string criterio, string filtro)
         {
-            // Lógica para el filtro avanzado (Etapa 2)
             List<Articulo> lista = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
             try
             {
                 string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, A.IdMarca, M.Descripcion AS Marca, A.IdCategoria, C.Descripcion AS Categoria FROM ARTICULOS A LEFT JOIN MARCAS M ON A.IdMarca = M.Id LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id WHERE ";
+                
                 if (campo == "Precio")
                 {
                     switch (criterio)
@@ -248,7 +246,7 @@ namespace GestorArt.Negocio
                             break;
                     }
                 }
-                else if (campo == "Categoría") // Agregado Categoria para más flexibilidad
+                else if (campo == "Categoría")
                 {
                     switch (criterio)
                     {
@@ -300,7 +298,6 @@ namespace GestorArt.Negocio
                 datos.cerrarConexion();
             }
 
-            // Cargar imágenes de la lista filtrada
             foreach (Articulo art in lista)
             {
                 AccesoDatos datosImg = new AccesoDatos();
@@ -331,4 +328,3 @@ namespace GestorArt.Negocio
         }
     }
 }
-

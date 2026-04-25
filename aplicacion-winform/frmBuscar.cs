@@ -27,20 +27,40 @@ namespace GestorArt
             cboCampo.SelectedIndex = 0;
         }
 
+        private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcion = cboCampo.SelectedItem.ToString();
+            cboCriterio.Items.Clear();
+
+            if (opcion == "Precio")
+            {
+                cboCriterio.Items.Add("Mayor a");
+                cboCriterio.Items.Add("Menor a");
+                cboCriterio.Items.Add("Igual a");
+            }
+            else
+            {
+                cboCriterio.Items.Add("Comienza con");
+                cboCriterio.Items.Add("Termina con");
+                cboCriterio.Items.Add("Contiene");
+            }
+            cboCriterio.SelectedIndex = 0;
+        }
+
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             Negocio.ArticuloNegocio negocio = new Negocio.ArticuloNegocio();
             try
             {
-                if (cboCampo.SelectedItem == null)
+                if (cboCampo.SelectedItem == null || cboCriterio.SelectedItem == null)
                 {
-                    MessageBox.Show("Por favor, seleccione un campo de búsqueda.");
+                    MessageBox.Show("Por favor, seleccione un campo y un criterio de búsqueda.");
                     return;
                 }
 
                 string campo = cboCampo.SelectedItem.ToString();
+                string criterio = cboCriterio.SelectedItem.ToString();
                 string filtro = txtFiltro.Text;
-                string criterio = campo == "Precio" ? "Igual a" : "Contiene";
 
                 if (string.IsNullOrWhiteSpace(filtro))
                 {
@@ -50,7 +70,7 @@ namespace GestorArt
                 {
                     if (campo == "Precio" && !SoloNumeros(filtro))
                     {
-                        MessageBox.Show("Para buscar por precio, escriba solamente números.");
+                        MessageBox.Show("Para buscar por precio, escriba solamente números (y puede usar punto o coma).");
                         return;
                     }
 
@@ -126,4 +146,3 @@ namespace GestorArt
         }
     }
 }
-
