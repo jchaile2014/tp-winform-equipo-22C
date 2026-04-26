@@ -15,14 +15,27 @@ namespace GestorArt
 
         private void InitializeComponent()
         {
+            this.pnlMain = new System.Windows.Forms.Panel();
             this.dgvMarcas = new System.Windows.Forms.DataGridView();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.txtNuevaMarca = new System.Windows.Forms.TextBox();
-            this.btnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.lblNuevaMarca = new System.Windows.Forms.Label();
+            this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMarcas)).BeginInit();
             this.SuspendLayout();
+            // 
+            // pnlMain
+            // 
+            this.pnlMain.Controls.Add(this.dgvMarcas);
+            this.pnlMain.Controls.Add(this.btnModificar);
+            this.pnlMain.Controls.Add(this.btnAgregar);
+            this.pnlMain.Controls.Add(this.txtNuevaMarca);
+            this.pnlMain.Controls.Add(this.lblNuevaMarca);
+            this.pnlMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(500, 310);
+            this.pnlMain.TabIndex = 0;
             // 
             // dgvMarcas
             // 
@@ -51,19 +64,9 @@ namespace GestorArt
             this.txtNuevaMarca.Size = new System.Drawing.Size(150, 20);
             this.txtNuevaMarca.TabIndex = 2;
             // 
-            // btnEliminar
+            // btnModificar  — movido a la izquierda
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(12, 268);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(120, 23);
-            this.btnEliminar.TabIndex = 4;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Location = new System.Drawing.Point(140, 268);
+            this.btnModificar.Location = new System.Drawing.Point(12, 268);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(120, 23);
             this.btnModificar.TabIndex = 5;
@@ -85,27 +88,23 @@ namespace GestorArt
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 310);
-            this.Controls.Add(this.btnModificar);
-            this.Controls.Add(this.btnEliminar);
-            this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.txtNuevaMarca);
-            this.Controls.Add(this.lblNuevaMarca);
-            this.Controls.Add(this.dgvMarcas);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Controls.Add(this.pnlMain);
+            this.MinimumSize = new System.Drawing.Size(520, 350);
             this.Name = "frmGestionMarcas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestión de Marcas";
             this.Load += new System.EventHandler(this.frmGestionMarcas_Load);
+            this.Resize += new System.EventHandler(this.frmGestionMarcas_Resize);
+            this.pnlMain.ResumeLayout(false);
+            this.pnlMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMarcas)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
-
         }
 
+        private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.DataGridView dgvMarcas;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.TextBox txtNuevaMarca;
-        private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Label lblNuevaMarca;
     }

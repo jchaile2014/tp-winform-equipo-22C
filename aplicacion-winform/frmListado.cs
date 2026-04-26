@@ -21,6 +21,20 @@ namespace GestorArt
                 ev.ThrowException = false;
             };
             cargar();
+            centrarPanel();
+        }
+
+        private void frmListado_Resize(object sender, EventArgs e)
+        {
+            centrarPanel();
+        }
+
+        private void centrarPanel()
+        {
+            pnlMain.Location = new System.Drawing.Point(
+                (this.ClientSize.Width - pnlMain.Width) / 2,
+                (this.ClientSize.Height - pnlMain.Height) / 2
+            );
         }
 
         private void cargar()

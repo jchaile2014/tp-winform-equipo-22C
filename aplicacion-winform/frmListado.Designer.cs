@@ -15,6 +15,7 @@ namespace GestorArt
         #region Windows Form Designer generated code
         private void InitializeComponent()
         {
+            this.pnlMain = new System.Windows.Forms.Panel();
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
             this.pbxArticulo = new System.Windows.Forms.PictureBox();
             this.btnAgregar = new System.Windows.Forms.Button();
@@ -22,9 +23,24 @@ namespace GestorArt
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnAnteriorImagen = new System.Windows.Forms.Button();
             this.btnSiguienteImagen = new System.Windows.Forms.Button();
+            this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.SuspendLayout();
+            // 
+            // pnlMain
+            // 
+            this.pnlMain.Controls.Add(this.dgvArticulos);
+            this.pnlMain.Controls.Add(this.pbxArticulo);
+            this.pnlMain.Controls.Add(this.btnAgregar);
+            this.pnlMain.Controls.Add(this.btnModificar);
+            this.pnlMain.Controls.Add(this.btnEliminar);
+            this.pnlMain.Controls.Add(this.btnAnteriorImagen);
+            this.pnlMain.Controls.Add(this.btnSiguienteImagen);
+            this.pnlMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(939, 570);
+            this.pnlMain.TabIndex = 0;
             // 
             // dgvArticulos
             // 
@@ -102,26 +118,22 @@ namespace GestorArt
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(939, 570);
-            this.Controls.Add(this.btnAnteriorImagen);
-            this.Controls.Add(this.btnSiguienteImagen);
-            this.Controls.Add(this.btnEliminar);
-            this.Controls.Add(this.btnModificar);
-            this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.pbxArticulo);
-            this.Controls.Add(this.dgvArticulos);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Controls.Add(this.pnlMain);
+            this.MinimumSize = new System.Drawing.Size(955, 609);
             this.Name = "frmListado";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado de Art";
             this.Load += new System.EventHandler(this.frmListado_Load);
+            this.Resize += new System.EventHandler(this.frmListado_Resize);
+            this.pnlMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
 
+        private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.DataGridView dgvArticulos;
         private System.Windows.Forms.PictureBox pbxArticulo;
         private System.Windows.Forms.Button btnAgregar;

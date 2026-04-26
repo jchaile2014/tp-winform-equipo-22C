@@ -13,7 +13,7 @@ namespace GestorArt.Negocio
 
             try
             {
-                datos.setearConsulta("SELECT Id, Descripcion, Activo FROM MARCAS WHERE Activo = 1 OR Activo IS NULL");
+                datos.setearConsulta("SELECT Id, Descripcion FROM MARCAS");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -21,8 +21,7 @@ namespace GestorArt.Negocio
                     Marca aux = new Marca();
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    if (!(datos.Lector["Activo"] is DBNull))
-                        aux.Activo = (bool)datos.Lector["Activo"];
+
 
                     lista.Add(aux);
                 }

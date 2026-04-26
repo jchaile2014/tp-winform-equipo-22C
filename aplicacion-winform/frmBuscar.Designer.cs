@@ -17,6 +17,7 @@ namespace GestorArt
 
         private void InitializeComponent()
         {
+            this.pnlMain = new System.Windows.Forms.Panel();
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
             this.lblCampo = new System.Windows.Forms.Label();
             this.cboCampo = new System.Windows.Forms.ComboBox();
@@ -26,8 +27,25 @@ namespace GestorArt
             this.txtFiltro = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnDetalle = new System.Windows.Forms.Button();
+            this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             this.SuspendLayout();
+            // 
+            // pnlMain
+            // 
+            this.pnlMain.Controls.Add(this.dgvArticulos);
+            this.pnlMain.Controls.Add(this.lblCampo);
+            this.pnlMain.Controls.Add(this.cboCampo);
+            this.pnlMain.Controls.Add(this.lblCriterio);
+            this.pnlMain.Controls.Add(this.cboCriterio);
+            this.pnlMain.Controls.Add(this.lblFiltro);
+            this.pnlMain.Controls.Add(this.txtFiltro);
+            this.pnlMain.Controls.Add(this.btnBuscar);
+            this.pnlMain.Controls.Add(this.btnDetalle);
+            this.pnlMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(866, 570);
+            this.pnlMain.TabIndex = 0;
             // 
             // dgvArticulos
             // 
@@ -118,28 +136,22 @@ namespace GestorArt
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(866, 570);
-            this.Controls.Add(this.btnDetalle);
-            this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.txtFiltro);
-            this.Controls.Add(this.lblFiltro);
-            this.Controls.Add(this.cboCriterio);
-            this.Controls.Add(this.lblCriterio);
-            this.Controls.Add(this.cboCampo);
-            this.Controls.Add(this.lblCampo);
-            this.Controls.Add(this.dgvArticulos);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Controls.Add(this.pnlMain);
+            this.MinimumSize = new System.Drawing.Size(882, 609);
             this.Name = "frmBuscar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Buscar Artículos";
             this.Load += new System.EventHandler(this.frmBuscar_Load);
+            this.Resize += new System.EventHandler(this.frmBuscar_Resize);
+            this.pnlMain.ResumeLayout(false);
+            this.pnlMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
-
         }
 
         #endregion
-        
+
+        private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.DataGridView dgvArticulos;
         private System.Windows.Forms.Label lblCampo;
         private System.Windows.Forms.ComboBox cboCampo;

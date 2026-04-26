@@ -19,6 +19,20 @@ namespace GestorArt
         private void frmGestionCategorias_Load(object sender, EventArgs e)
         {
             cargar();
+            centrarPanel();
+        }
+
+        private void frmGestionCategorias_Resize(object sender, EventArgs e)
+        {
+            centrarPanel();
+        }
+
+        private void centrarPanel()
+        {
+            pnlMain.Location = new System.Drawing.Point(
+                (this.ClientSize.Width - pnlMain.Width) / 2,
+                (this.ClientSize.Height - pnlMain.Height) / 2
+            );
         }
 
         private void cargar()
@@ -26,10 +40,6 @@ namespace GestorArt
             try
             {
                 dgvCategorias.DataSource = negocio.listar();
-                if (dgvCategorias.Columns.Contains("Activo"))
-                {
-                    dgvCategorias.Columns["Activo"].Visible = false;
-                }
             }
             catch (Exception ex)
             {
@@ -89,30 +99,6 @@ namespace GestorArt
             }
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            if (dgvCategorias.CurrentRow != null)
-            {
-                try
-                {
-                    Categoria seleccionada = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
-                    DialogResult respuesta = MessageBox.Show($"¿Seguro que desea eliminar la categoría {seleccionada.Descripcion}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (respuesta == DialogResult.Yes)
-                    {
-                        negocio.eliminarLogica(seleccionada.Id);
-                        MessageBox.Show("Categoría eliminada lógicamente.");
-                        cargar();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }
-            else
-            {
-                MessageBox.Show("Seleccione una categoría para eliminar.");
-            }
-        }
+
     }
 }

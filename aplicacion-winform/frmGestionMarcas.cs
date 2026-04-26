@@ -19,6 +19,20 @@ namespace GestorArt
         private void frmGestionMarcas_Load(object sender, EventArgs e)
         {
             cargar();
+            centrarPanel();
+        }
+
+        private void frmGestionMarcas_Resize(object sender, EventArgs e)
+        {
+            centrarPanel();
+        }
+
+        private void centrarPanel()
+        {
+            pnlMain.Location = new System.Drawing.Point(
+                (this.ClientSize.Width - pnlMain.Width) / 2,
+                (this.ClientSize.Height - pnlMain.Height) / 2
+            );
         }
 
         private void cargar()
@@ -26,10 +40,6 @@ namespace GestorArt
             try
             {
                 dgvMarcas.DataSource = negocio.listar();
-                if (dgvMarcas.Columns.Contains("Activo"))
-                {
-                    dgvMarcas.Columns["Activo"].Visible = false;
-                }
             }
             catch (Exception ex)
             {
@@ -89,30 +99,6 @@ namespace GestorArt
             }
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            if (dgvMarcas.CurrentRow != null)
-            {
-                try
-                {
-                    Marca seleccionada = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
-                    DialogResult respuesta = MessageBox.Show($"¿Seguro que desea eliminar la marca {seleccionada.Descripcion}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (respuesta == DialogResult.Yes)
-                    {
-                        negocio.eliminarLogica(seleccionada.Id);
-                        MessageBox.Show("Marca eliminada lógicamente.");
-                        cargar();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }
-            else
-            {
-                MessageBox.Show("Seleccione una marca para eliminar.");
-            }
-        }
+
     }
 }
