@@ -113,24 +113,11 @@ namespace GestorArt
         {
             try
             {
-                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
-                System.Net.WebClient cliente = new System.Net.WebClient();
-                cliente.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36");
-                System.IO.Stream stream = cliente.OpenRead(imagen);
-                pbxArticulo.Image = System.Drawing.Image.FromStream(stream);
-                stream.Close();
+                pbxArticulo.Load(imagen);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                try {
-                    System.Net.WebClient cliente = new System.Net.WebClient();
-                    cliente.Headers.Add("User-Agent", "Mozilla/5.0");
-                    System.IO.Stream stream = cliente.OpenRead("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
-                    pbxArticulo.Image = System.Drawing.Image.FromStream(stream);
-                    stream.Close();
-                } catch {
-                    pbxArticulo.Image = null;
-                }
+                pbxArticulo.Image = null;
             }
         }
 

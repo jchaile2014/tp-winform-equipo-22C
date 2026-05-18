@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using GestorArt.Dominio;
+using Dominio;
 
-namespace GestorArt.Negocio
+namespace Negocio
 {
     public class MarcaNegocio
     {
@@ -21,12 +21,8 @@ namespace GestorArt.Negocio
                     Marca aux = new Marca();
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-
-
                     lista.Add(aux);
                 }
-
-                return lista;
             }
             catch (Exception ex)
             {
@@ -36,6 +32,8 @@ namespace GestorArt.Negocio
             {
                 datos.cerrarConexion();
             }
+
+            return lista;
         }
 
         public void agregar(Marca nueva)
@@ -57,25 +55,7 @@ namespace GestorArt.Negocio
             }
         }
 
-        public void eliminarLogica(int id)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            try
-            {
-                datos.setearConsulta("UPDATE MARCAS SET Activo = 0 WHERE Id = @id");
-                datos.setearParametro("@id", id);
-                datos.ejecutarAccion();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-
+       
         public void modificar(Marca marca)
         {
             AccesoDatos datos = new AccesoDatos();

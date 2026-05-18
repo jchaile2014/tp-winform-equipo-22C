@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
-using GestorArt.Dominio;
-using GestorArt.Negocio;
+using Dominio;
+using Negocio;
 
 namespace GestorArt
 {

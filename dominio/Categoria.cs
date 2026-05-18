@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GestorArt.Dominio
+namespace Dominio
 {
     public class Categoria
     {

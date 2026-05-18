@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using GestorArt.Dominio;
+using Dominio;
 
 namespace GestorArt
 {
@@ -14,26 +14,30 @@ namespace GestorArt
             InitializeComponent();
         }
 
-        public frmAgregar(Dominio.Articulo articulo, bool modoDetalle = false)
+        public frmAgregar(Dominio.Articulo articulo)
         {
             InitializeComponent();
             this.articulo = articulo;
-            Text = modoDetalle ? "Detalle del Artículo" : "Modificar Artículo";
-            
-            if (modoDetalle)
-            {
-                txtCodigo.ReadOnly = true;
-                txtNombre.ReadOnly = true;
-                txtDescripcion.ReadOnly = true;
-                cboMarca.Enabled = false;
-                cboCategoria.Enabled = false;
-                txtPrecio.ReadOnly = true;
-                txtImagenUrl.ReadOnly = true;
-                btnAgregarImagen.Visible = false;
-                btnQuitarImagen.Visible = false;
-                btnAceptar.Visible = false;
-                btnCancelar.Text = "Cerrar";
-            }
+            Text = "Modificar Artículo";
+        }
+
+        public frmAgregar(Dominio.Articulo articulo, bool modoDetalle)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
+            Text = "Detalle del Artículo";
+
+            txtCodigo.ReadOnly = true;
+            txtNombre.ReadOnly = true;
+            txtDescripcion.ReadOnly = true;
+            cboMarca.Enabled = false;
+            cboCategoria.Enabled = false;
+            txtPrecio.ReadOnly = true;
+            txtImagenUrl.ReadOnly = true;
+            btnAgregarImagen.Visible = false;
+            btnQuitarImagen.Visible = false;
+            btnAceptar.Visible = false;
+            btnCancelar.Text = "Cerrar";
         }
 
         private void frmAgregar_Load(object sender, EventArgs e)
@@ -174,24 +178,11 @@ namespace GestorArt
         {
             try
             {
-                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
-                System.Net.WebClient cliente = new System.Net.WebClient();
-                cliente.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36");
-                System.IO.Stream stream = cliente.OpenRead(imagen);
-                pbxImagen.Image = System.Drawing.Image.FromStream(stream);
-                stream.Close();
+                pbxImagen.Load(imagen);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                try {
-                    System.Net.WebClient cliente = new System.Net.WebClient();
-                    cliente.Headers.Add("User-Agent", "Mozilla/5.0");
-                    System.IO.Stream stream = cliente.OpenRead("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
-                    pbxImagen.Image = System.Drawing.Image.FromStream(stream);
-                    stream.Close();
-                } catch {
-                    pbxImagen.Image = null;
-                }
+                pbxImagen.Image = null;
             }
         }
     }

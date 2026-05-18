@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using GestorArt.Dominio;
+using Dominio;
 
-namespace GestorArt.Negocio
+namespace Negocio
 {
     public class ArticuloNegocio
     {
@@ -58,14 +58,14 @@ namespace GestorArt.Negocio
                     datosImg.setearConsulta("SELECT Id, IdArticulo, ImagenUrl FROM IMAGENES WHERE IdArticulo = @IdArticulo");
                     datosImg.setearParametro("@IdArticulo", art.Id);
                     datosImg.ejecutarLectura();
-                    
+
                     while (datosImg.Lector.Read())
                     {
                         Imagen img = new Imagen();
                         img.Id = (int)datosImg.Lector["Id"];
                         img.IdArticulo = (int)datosImg.Lector["IdArticulo"];
                         img.ImagenUrl = (string)datosImg.Lector["ImagenUrl"];
-                        
+
                         art.Imagenes.Add(img);
                     }
                 }
@@ -87,7 +87,7 @@ namespace GestorArt.Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) OUTPUT INSERTED.Id VALUES (@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @precio)");
+                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES (@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @precio) SELECT @@IDENTITY");
                 datos.setearParametro("@codigo", nuevo.Codigo);
                 datos.setearParametro("@nombre", nuevo.Nombre);
                 datos.setearParametro("@descripcion", nuevo.Descripcion);
@@ -200,7 +200,7 @@ namespace GestorArt.Negocio
             try
             {
                 string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, A.IdMarca, M.Descripcion AS Marca, A.IdCategoria, C.Descripcion AS Categoria FROM ARTICULOS A LEFT JOIN MARCAS M ON A.IdMarca = M.Id LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id WHERE ";
-                
+
                 if (campo == "Precio")
                 {
                     switch (criterio)
