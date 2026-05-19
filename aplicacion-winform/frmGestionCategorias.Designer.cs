@@ -17,9 +17,9 @@ namespace GestorArt
         {
             this.pnlMain = new System.Windows.Forms.Panel();
             this.dgvCategorias = new System.Windows.Forms.DataGridView();
+            this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.txtNuevaCategoria = new System.Windows.Forms.TextBox();
-            this.btnModificar = new System.Windows.Forms.Button();
             this.lblNuevaCategoria = new System.Windows.Forms.Label();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).BeginInit();
@@ -47,6 +47,16 @@ namespace GestorArt
             this.dgvCategorias.Size = new System.Drawing.Size(300, 250);
             this.dgvCategorias.TabIndex = 0;
             // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(12, 268);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(120, 23);
+            this.btnModificar.TabIndex = 5;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
             // btnAgregar
             // 
             this.btnAgregar.Location = new System.Drawing.Point(333, 57);
@@ -64,16 +74,6 @@ namespace GestorArt
             this.txtNuevaCategoria.Size = new System.Drawing.Size(150, 20);
             this.txtNuevaCategoria.TabIndex = 2;
             // 
-            // btnModificar  — movido a la izquierda
-            // 
-            this.btnModificar.Location = new System.Drawing.Point(12, 268);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(120, 23);
-            this.btnModificar.TabIndex = 5;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
             // lblNuevaCategoria
             // 
             this.lblNuevaCategoria.AutoSize = true;
@@ -87,8 +87,11 @@ namespace GestorArt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 310);
+            this.ClientSize = new System.Drawing.Size(504, 311);
             this.Controls.Add(this.pnlMain);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(520, 350);
             this.Name = "frmGestionCategorias";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -99,6 +102,7 @@ namespace GestorArt
             this.pnlMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         private System.Windows.Forms.Panel pnlMain;

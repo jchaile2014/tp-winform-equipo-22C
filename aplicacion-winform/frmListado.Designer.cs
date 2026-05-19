@@ -39,7 +39,7 @@ namespace GestorArt
             this.pnlMain.Controls.Add(this.btnSiguienteImagen);
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(939, 570);
+            this.pnlMain.Size = new System.Drawing.Size(872, 361);
             this.pnlMain.TabIndex = 0;
             // 
             // dgvArticulos
@@ -49,22 +49,23 @@ namespace GestorArt
             this.dgvArticulos.Location = new System.Drawing.Point(12, 12);
             this.dgvArticulos.Name = "dgvArticulos";
             this.dgvArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvArticulos.Size = new System.Drawing.Size(645, 508);
+            this.dgvArticulos.Size = new System.Drawing.Size(576, 269);
             this.dgvArticulos.TabIndex = 0;
             this.dgvArticulos.SelectionChanged += new System.EventHandler(this.dgvArticulos_SelectionChanged);
             // 
             // pbxArticulo
             // 
-            this.pbxArticulo.Location = new System.Drawing.Point(663, 12);
+            this.pbxArticulo.Location = new System.Drawing.Point(594, 12);
             this.pbxArticulo.Name = "pbxArticulo";
             this.pbxArticulo.Size = new System.Drawing.Size(264, 269);
             this.pbxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxArticulo.TabIndex = 1;
             this.pbxArticulo.TabStop = false;
+            this.pbxArticulo.Click += new System.EventHandler(this.pbxArticulo_Click);
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(12, 535);
+            this.btnAgregar.Location = new System.Drawing.Point(12, 287);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 2;
@@ -74,7 +75,7 @@ namespace GestorArt
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(93, 535);
+            this.btnModificar.Location = new System.Drawing.Point(93, 287);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 3;
@@ -84,7 +85,7 @@ namespace GestorArt
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(174, 535);
+            this.btnEliminar.Location = new System.Drawing.Point(174, 287);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 4;
@@ -94,7 +95,7 @@ namespace GestorArt
             // 
             // btnAnteriorImagen
             // 
-            this.btnAnteriorImagen.Location = new System.Drawing.Point(663, 287);
+            this.btnAnteriorImagen.Location = new System.Drawing.Point(594, 287);
             this.btnAnteriorImagen.Name = "btnAnteriorImagen";
             this.btnAnteriorImagen.Size = new System.Drawing.Size(40, 23);
             this.btnAnteriorImagen.TabIndex = 5;
@@ -104,7 +105,7 @@ namespace GestorArt
             // 
             // btnSiguienteImagen
             // 
-            this.btnSiguienteImagen.Location = new System.Drawing.Point(887, 287);
+            this.btnSiguienteImagen.Location = new System.Drawing.Point(818, 287);
             this.btnSiguienteImagen.Name = "btnSiguienteImagen";
             this.btnSiguienteImagen.Size = new System.Drawing.Size(40, 23);
             this.btnSiguienteImagen.TabIndex = 6;
@@ -117,18 +118,21 @@ namespace GestorArt
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(939, 570);
+            this.ClientSize = new System.Drawing.Size(871, 361);
             this.Controls.Add(this.pnlMain);
-            this.MinimumSize = new System.Drawing.Size(955, 609);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(655, 400);
             this.Name = "frmListado";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado de Art";
             this.Load += new System.EventHandler(this.frmListado_Load);
-            this.Resize += new System.EventHandler(this.frmListado_Resize);
             this.pnlMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         #endregion

@@ -109,7 +109,7 @@ namespace GestorArt
 
                 articulo.Imagenes.Clear();
                 foreach (string url in lbxImagenes.Items)
-                {
+                { 
                     Imagen img = new Imagen();
                     img.ImagenUrl = url;
                     articulo.Imagenes.Add(img);

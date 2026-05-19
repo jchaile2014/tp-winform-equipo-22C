@@ -44,7 +44,7 @@ namespace GestorArt
             this.pnlMain.Controls.Add(this.btnDetalle);
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(866, 570);
+            this.pnlMain.Size = new System.Drawing.Size(699, 383);
             this.pnlMain.TabIndex = 0;
             // 
             // dgvArticulos
@@ -54,7 +54,7 @@ namespace GestorArt
             this.dgvArticulos.Location = new System.Drawing.Point(12, 50);
             this.dgvArticulos.Name = "dgvArticulos";
             this.dgvArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvArticulos.Size = new System.Drawing.Size(842, 470);
+            this.dgvArticulos.Size = new System.Drawing.Size(645, 298);
             this.dgvArticulos.TabIndex = 0;
             // 
             // lblCampo
@@ -122,7 +122,7 @@ namespace GestorArt
             // 
             // btnDetalle
             // 
-            this.btnDetalle.Location = new System.Drawing.Point(12, 535);
+            this.btnDetalle.Location = new System.Drawing.Point(12, 354);
             this.btnDetalle.Name = "btnDetalle";
             this.btnDetalle.Size = new System.Drawing.Size(120, 23);
             this.btnDetalle.TabIndex = 8;
@@ -135,9 +135,12 @@ namespace GestorArt
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(866, 570);
+            this.ClientSize = new System.Drawing.Size(708, 398);
             this.Controls.Add(this.pnlMain);
-            this.MinimumSize = new System.Drawing.Size(882, 609);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "frmBuscar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Buscar Artículos";
@@ -147,6 +150,7 @@ namespace GestorArt
             this.pnlMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         #endregion
