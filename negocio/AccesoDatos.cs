@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 namespace Negocio
 {
@@ -18,13 +16,13 @@ namespace Negocio
 
         public AccesoDatos()
         {
-            conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["CatalogoDB"].ConnectionString);
+            conexion = new SqlConnection("server=DESKTOP-GCAJBDA\\SQLEXPRESS; database=CATALOGO_P3_DB; integrated security=true");
             comando = new SqlCommand();
         }
 
         public void setearConsulta(string consulta)
         {
-            comando.CommandType = System.Data.CommandType.Text;
+            comando.CommandType = CommandType.Text;
             comando.CommandText = consulta;
         }
 
@@ -36,43 +34,22 @@ namespace Negocio
         public void ejecutarLectura()
         {
             comando.Connection = conexion;
-            try
-            {
-                conexion.Open();
-                lector = comando.ExecuteReader();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            conexion.Open();
+            lector = comando.ExecuteReader();
         }
 
         public void ejecutarAccion()
         {
             comando.Connection = conexion;
-            try
-            {
-                conexion.Open();
-                comando.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            conexion.Open();
+            comando.ExecuteNonQuery();
         }
 
         public int ejecutarAccionScalar()
         {
             comando.Connection = conexion;
-            try
-            {
-                conexion.Open();
-                return int.Parse(comando.ExecuteScalar().ToString());
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            conexion.Open();
+            return int.Parse(comando.ExecuteScalar().ToString());
         }
 
         public void cerrarConexion()

@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
+using Dominio;
+using Negocio;
 
 namespace GestorArt
 {
     public partial class frmBuscar : Form
     {
-        private List<Dominio.Articulo> listaArticulos;
+        private List<Articulo> listaArticulos;
 
         public frmBuscar()
         {
@@ -16,31 +17,13 @@ namespace GestorArt
 
         private void frmBuscar_Load(object sender, EventArgs e)
         {
-            dgvArticulos.DataError += delegate (object s, DataGridViewDataErrorEventArgs ev) {
-                ev.ThrowException = false;
-            };
-
             cboCampo.Items.Add("Precio");
             cboCampo.Items.Add("Nombre");
             cboCampo.Items.Add("Marca");
             cboCampo.Items.Add("Categoría");
             cboCampo.SelectedIndex = 0;
-            centrarPanel();
         }
-
-        private void frmBuscar_Resize(object sender, EventArgs e)
-        {
-            centrarPanel();
-        }
-
-        private void centrarPanel()
-        {
-            pnlMain.Location = new System.Drawing.Point(
-                (this.ClientSize.Width - pnlMain.Width) / 2,
-                (this.ClientSize.Height - pnlMain.Height) / 2
-            );
-        }
-
+     
         private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
             string opcion = cboCampo.SelectedItem.ToString();
@@ -63,40 +46,36 @@ namespace GestorArt
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            Negocio.ArticuloNegocio negocio = new Negocio.ArticuloNegocio();
+            if (cboCampo.SelectedItem == null || cboCriterio.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un campo y un criterio.");
+                return;
+            }
+
+            string campo = cboCampo.SelectedItem.ToString();
+            string criterio = cboCriterio.SelectedItem.ToString();
+            string filtro = txtFiltro.Text;
+
+            if (campo == "Precio" && !string.IsNullOrWhiteSpace(filtro) && !SoloNumeros(filtro))
+            {
+                MessageBox.Show("Para buscar por precio escriba solo números (admite coma o punto).");
+                return;
+            }
+
             try
             {
-                if (cboCampo.SelectedItem == null || cboCriterio.SelectedItem == null)
-                {
-                    MessageBox.Show("Por favor, seleccione un campo y un criterio de búsqueda.");
-                    return;
-                }
-
-                string campo = cboCampo.SelectedItem.ToString();
-                string criterio = cboCriterio.SelectedItem.ToString();
-                string filtro = txtFiltro.Text;
-
+                ArticuloNegocio negocio = new ArticuloNegocio();
                 if (string.IsNullOrWhiteSpace(filtro))
-                {
                     listaArticulos = negocio.listar();
-                }
                 else
-                {
-                    if (campo == "Precio" && !SoloNumeros(filtro))
-                    {
-                        MessageBox.Show("Para buscar por precio, escriba solamente números (y puede usar punto o coma).");
-                        return;
-                    }
-
                     listaArticulos = negocio.filtrar(campo, criterio, filtro);
-                }
-                
+
+                armarColumnas(campo);
                 dgvArticulos.DataSource = listaArticulos;
-                ocultarColumnas(campo);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -104,59 +83,64 @@ namespace GestorArt
         {
             foreach (char caracter in cadena)
             {
-                if (!(char.IsNumber(caracter) || caracter == ',' || caracter == '.'))
+                if (!char.IsNumber(caracter) && caracter != ',' && caracter != '.')
                     return false;
             }
             return true;
         }
 
-        private void ocultarColumnas(string campoSeleccionado)
+        private void armarColumnas(string campoSeleccionado)
         {
-            if (dgvArticulos.Columns.Contains("Id"))
-                dgvArticulos.Columns["Id"].Visible = false;
-            if (dgvArticulos.Columns.Contains("Descripcion"))
-                dgvArticulos.Columns["Descripcion"].Visible = false;
-            if(dgvArticulos.Columns.Contains("Imagenes"))
-                dgvArticulos.Columns["Imagenes"].Visible = false;
-            
-            if(dgvArticulos.Columns.Contains("Nombre"))
-                dgvArticulos.Columns["Nombre"].Visible = false;
-            if(dgvArticulos.Columns.Contains("Marca"))
-                dgvArticulos.Columns["Marca"].Visible = false;
-            if(dgvArticulos.Columns.Contains("Categoria"))
-                dgvArticulos.Columns["Categoria"].Visible = false;
-            if(dgvArticulos.Columns.Contains("Precio"))
-                dgvArticulos.Columns["Precio"].Visible = false;
+            dgvArticulos.AutoGenerateColumns = false;
+            dgvArticulos.DataSource = null;
+            dgvArticulos.Columns.Clear();
 
-            if(dgvArticulos.Columns.Contains("Codigo"))
-                dgvArticulos.Columns["Codigo"].Visible = true;
+            DataGridViewTextBoxColumn colCodigo = new DataGridViewTextBoxColumn();
+            colCodigo.Name = "Codigo";
+            colCodigo.HeaderText = "Código";
+            colCodigo.DataPropertyName = "Codigo";
+            dgvArticulos.Columns.Add(colCodigo);
 
-            if (campoSeleccionado == "Precio" && dgvArticulos.Columns.Contains("Precio"))
+            DataGridViewTextBoxColumn colExtra = new DataGridViewTextBoxColumn();
+            if (campoSeleccionado == "Precio")
             {
-                dgvArticulos.Columns["Precio"].Visible = true;
-                dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "0.00";
+                colExtra.Name = "Precio";
+                colExtra.HeaderText = "Precio";
+                colExtra.DataPropertyName = "Precio";
+                colExtra.DefaultCellStyle.Format = "0.00";
             }
-            else if (campoSeleccionado == "Nombre" && dgvArticulos.Columns.Contains("Nombre"))
-                dgvArticulos.Columns["Nombre"].Visible = true;
-            else if (campoSeleccionado == "Marca" && dgvArticulos.Columns.Contains("Marca"))
-                dgvArticulos.Columns["Marca"].Visible = true;
-            else if (campoSeleccionado == "Categoría" && dgvArticulos.Columns.Contains("Categoria"))
-                dgvArticulos.Columns["Categoria"].Visible = true;
+            else if (campoSeleccionado == "Nombre")
+            {
+                colExtra.Name = "Nombre";
+                colExtra.HeaderText = "Nombre";
+                colExtra.DataPropertyName = "Nombre";
+            }
+            else if (campoSeleccionado == "Marca")
+            {
+                colExtra.Name = "Marca";
+                colExtra.HeaderText = "Marca";
+                colExtra.DataPropertyName = "Marca";
+            }
+            else
+            {
+                colExtra.Name = "Categoria";
+                colExtra.HeaderText = "Categoría";
+                colExtra.DataPropertyName = "Categoria";
+            }
+            dgvArticulos.Columns.Add(colExtra);
         }
 
         private void btnDetalle_Click(object sender, EventArgs e)
         {
-            Dominio.Articulo seleccionado;
-            if (dgvArticulos.CurrentRow != null)
+            if (dgvArticulos.CurrentRow == null)
             {
-                seleccionado = (Dominio.Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-                frmAgregar detalle = new frmAgregar(seleccionado, true);
-                detalle.ShowDialog();
+                MessageBox.Show("Seleccione un artículo para ver el detalle.");
+                return;
             }
-            else
-            {
-                MessageBox.Show("Por favor, seleccione un artículo para ver su detalle.");
-            }
+
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            frmAgregar detalle = new frmAgregar(seleccionado, true);
+            detalle.ShowDialog();
         }
     }
 }

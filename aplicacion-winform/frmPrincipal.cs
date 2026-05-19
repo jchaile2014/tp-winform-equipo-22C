@@ -10,57 +10,43 @@ namespace GestorArt
             InitializeComponent();
         }
 
-        private void listadoDeArtToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (var item in Application.OpenForms)
-            {
-                if (item.GetType() == typeof(frmBuscar))
-                    return;
-            }
-            frmBuscar ventanaBuscar = new frmBuscar();
-            ventanaBuscar.MdiParent = this;
-            ventanaBuscar.Show();
-        }
-
         private void articulosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (var item in Application.OpenForms)
-            {
-                if (item.GetType() == typeof(frmListado))
-                    return;
-            }
-            frmListado ventanaListado = new frmListado();
-            ventanaListado.MdiParent = this;
-            ventanaListado.Show();
+            abrirVentana(new frmListado());
+        }
+
+        private void listadoDeArtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            abrirVentana(new frmBuscar());
         }
 
         private void marcasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (var item in Application.OpenForms)
-            {
-                if (item.GetType() == typeof(frmGestionMarcas))
-                    return;
-            }
-            frmGestionMarcas ventanaMarcas = new frmGestionMarcas();
-            ventanaMarcas.MdiParent = this;
-            ventanaMarcas.Show();
+            abrirVentana(new frmGestionMarcas());
         }
 
         private void categoriasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (var item in Application.OpenForms)
-            {
-                if (item.GetType() == typeof(frmGestionCategorias))
-                    return;
-            }
-            frmGestionCategorias ventanaCategorias = new frmGestionCategorias();
-            ventanaCategorias.MdiParent = this;
-            ventanaCategorias.Show();
+            abrirVentana(new frmGestionCategorias());
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void abrirVentana(Form ventana)
+        {
+            foreach (Form abierta in MdiChildren)
+            {
+                if (abierta.GetType() == ventana.GetType())
+                {
+                    abierta.BringToFront();
+                    return;
+                }
+            }
+            ventana.MdiParent = this;
+            ventana.Show();
         }
     }
 }

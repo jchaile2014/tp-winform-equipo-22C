@@ -10,12 +10,10 @@ namespace Negocio
         {
             List<Marca> lista = new List<Marca>();
             AccesoDatos datos = new AccesoDatos();
-
             try
             {
-                datos.setearConsulta("SELECT Id, Descripcion FROM MARCAS");
+                datos.setearConsulta("Select Id, Descripcion From MARCAS");
                 datos.ejecutarLectura();
-
                 while (datos.Lector.Read())
                 {
                     Marca aux = new Marca();
@@ -32,7 +30,6 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
-
             return lista;
         }
 
@@ -41,7 +38,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("INSERT INTO MARCAS (Descripcion, Activo) VALUES (@descripcion, 1)");
+                datos.setearConsulta("Insert into MARCAS (Descripcion) values (@descripcion)");
                 datos.setearParametro("@descripcion", nueva.Descripcion);
                 datos.ejecutarAccion();
             }
@@ -55,13 +52,12 @@ namespace Negocio
             }
         }
 
-       
         public void modificar(Marca marca)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE MARCAS SET Descripcion = @descripcion WHERE Id = @id");
+                datos.setearConsulta("update MARCAS set Descripcion = @descripcion Where Id = @id");
                 datos.setearParametro("@descripcion", marca.Descripcion);
                 datos.setearParametro("@id", marca.Id);
                 datos.ejecutarAccion();

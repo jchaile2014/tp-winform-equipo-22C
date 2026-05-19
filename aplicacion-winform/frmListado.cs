@@ -1,14 +1,15 @@
+using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
 
 namespace GestorArt
 {
     public partial class frmListado : Form
     {
-        private List<Dominio.Articulo> listaArticulos;
-        private int indiceImagenActual = 0;
+        private List<Articulo> listaArticulos;
+        private int indiceImagenActual;
 
         public frmListado()
         {
@@ -17,23 +18,45 @@ namespace GestorArt
 
         private void frmListado_Load(object sender, EventArgs e)
         {
-            dgvArticulos.DataError += delegate (object s, DataGridViewDataErrorEventArgs ev)
-            {
-                ev.ThrowException = false;
-            };
+            armarColumnas();
             cargar();
         }
-       
+
+        private void armarColumnas()
+        {
+            dgvArticulos.AutoGenerateColumns = false;
+
+            agregarColumna("Codigo", "Código");
+            agregarColumna("Nombre", "Nombre");
+            agregarColumna("Descripcion", "Descripción");
+            agregarColumna("Marca", "Marca");
+            agregarColumna("Categoria", "Categoría");
+
+            DataGridViewTextBoxColumn colPrecio = new DataGridViewTextBoxColumn();
+            colPrecio.Name = "Precio";
+            colPrecio.HeaderText = "Precio";
+            colPrecio.DataPropertyName = "Precio";
+            colPrecio.DefaultCellStyle.Format = "0.00";
+            dgvArticulos.Columns.Add(colPrecio);
+        }
+
+        private void agregarColumna(string propiedad, string titulo)
+        {
+            DataGridViewTextBoxColumn col = new DataGridViewTextBoxColumn();
+            col.Name = propiedad;
+            col.HeaderText = titulo;
+            col.DataPropertyName = propiedad;
+            dgvArticulos.Columns.Add(col);
+        }
 
         private void cargar()
         {
-            Negocio.ArticuloNegocio negocio = new Negocio.ArticuloNegocio();
+            ArticuloNegocio negocio = new ArticuloNegocio();
             try
             {
                 listaArticulos = negocio.listar();
                 dgvArticulos.DataSource = listaArticulos;
-                ocultarColumnas();
-                
+
                 if (listaArticulos.Count > 0)
                 {
                     indiceImagenActual = 0;
@@ -42,19 +65,8 @@ namespace GestorArt
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
-        }
-
-        private void ocultarColumnas()
-        {
-            if(dgvArticulos.Columns.Contains("Id"))
-                dgvArticulos.Columns["Id"].Visible = false;
-            if(dgvArticulos.Columns.Contains("Imagenes"))
-                dgvArticulos.Columns["Imagenes"].Visible = false;
-                
-            if (dgvArticulos.Columns.Contains("Precio"))
-                dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "0.00";
         }
 
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
@@ -68,20 +80,34 @@ namespace GestorArt
 
         private void cargarImagenActual()
         {
-            if (dgvArticulos.CurrentRow != null)
-            {
-                Dominio.Articulo seleccionado = (Dominio.Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-                if (seleccionado.Imagenes.Count > 0)
-                {
-                    if (indiceImagenActual < 0) indiceImagenActual = seleccionado.Imagenes.Count - 1;
-                    if (indiceImagenActual >= seleccionado.Imagenes.Count) indiceImagenActual = 0;
+            if (dgvArticulos.CurrentRow == null)
+                return;
 
-                    cargarImagen(seleccionado.Imagenes[indiceImagenActual].ImagenUrl);
-                }
-                else
-                {
-                    cargarImagen("");
-                }
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+
+            if (seleccionado.Imagenes.Count == 0)
+            {
+                cargarImagen("");
+                return;
+            }
+
+            if (indiceImagenActual < 0)
+                indiceImagenActual = seleccionado.Imagenes.Count - 1;
+            if (indiceImagenActual >= seleccionado.Imagenes.Count)
+                indiceImagenActual = 0;
+
+            cargarImagen(seleccionado.Imagenes[indiceImagenActual].ImagenUrl);
+        }
+
+        private void cargarImagen(string url)
+        {
+            try
+            {
+                pbxArticulo.Load(url);
+            }
+            catch
+            {
+                pbxArticulo.Load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJQeJyzgAzTEVqXiGe90RGBFhfp_4RcJJMQ&s");
             }
         }
 
@@ -97,18 +123,6 @@ namespace GestorArt
             cargarImagenActual();
         }
 
-        private void cargarImagen(string imagen)
-        {
-            try
-            {
-                pbxArticulo.Load(imagen);
-            }
-            catch (Exception ex)
-            {
-                pbxArticulo.Image = null;
-            }
-        }
-
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             frmAgregar alta = new frmAgregar();
@@ -118,50 +132,41 @@ namespace GestorArt
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            Dominio.Articulo seleccionado;
-            if (dgvArticulos.CurrentRow != null)
+            if (dgvArticulos.CurrentRow == null)
             {
-                seleccionado = (Dominio.Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-                frmAgregar modificar = new frmAgregar(seleccionado);
-                modificar.ShowDialog();
-                cargar();
+                MessageBox.Show("Seleccione un artículo para modificar.");
+                return;
             }
-            else
-            {
-                MessageBox.Show("Por favor, seleccione un artículo para modificar.");
-            }
+
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            frmAgregar modificar = new frmAgregar(seleccionado);
+            modificar.ShowDialog();
+            cargar();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            Negocio.ArticuloNegocio negocio = new Negocio.ArticuloNegocio();
-            Dominio.Articulo seleccionado;
+            if (dgvArticulos.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un artículo para eliminar.");
+                return;
+            }
+
+            DialogResult respuesta = MessageBox.Show("¿Seguro querés eliminar el artículo?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (respuesta != DialogResult.Yes)
+                return;
+
             try
             {
-                if (dgvArticulos.CurrentRow != null)
-                {
-                    DialogResult respuesta = MessageBox.Show("¿Seguro querés eliminar el artículo?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (respuesta == DialogResult.Yes)
-                    {
-                        seleccionado = (Dominio.Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-                        negocio.eliminar(seleccionado.Id);
-                        cargar();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Por favor, seleccione un artículo para eliminar.");
-                }
+                Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                negocio.eliminar(seleccionado.Id);
+                cargar();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
-        }
-
-        private void pbxArticulo_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -7,13 +7,12 @@ namespace GestorArt
 {
     public partial class frmGestionMarcas : Form
     {
-        private MarcaNegocio negocio;
-        private Marca marcaSeleccionada = null;
+        private MarcaNegocio negocio = new MarcaNegocio();
+        private Marca marcaSeleccionada;
 
         public frmGestionMarcas()
         {
             InitializeComponent();
-            negocio = new MarcaNegocio();
         }
 
         private void frmGestionMarcas_Load(object sender, EventArgs e)
@@ -30,8 +29,8 @@ namespace GestorArt
         private void centrarPanel()
         {
             pnlMain.Location = new System.Drawing.Point(
-                (this.ClientSize.Width - pnlMain.Width) / 2,
-                (this.ClientSize.Height - pnlMain.Height) / 2
+                (ClientSize.Width - pnlMain.Width) / 2,
+                (ClientSize.Height - pnlMain.Height) / 2
             );
         }
 
@@ -43,20 +42,20 @@ namespace GestorArt
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtNuevaMarca.Text))
+            {
+                MessageBox.Show("Ingrese un nombre para la marca.");
+                return;
+            }
+
             try
             {
-                if (string.IsNullOrWhiteSpace(txtNuevaMarca.Text))
-                {
-                    MessageBox.Show("Por favor, ingrese un nombre para la marca.");
-                    return;
-                }
-
                 if (marcaSeleccionada == null)
                 {
                     Marca nueva = new Marca();
@@ -69,7 +68,6 @@ namespace GestorArt
                     marcaSeleccionada.Descripcion = txtNuevaMarca.Text;
                     negocio.modificar(marcaSeleccionada);
                     MessageBox.Show("Marca modificada exitosamente.");
-                    
                     marcaSeleccionada = null;
                     btnAgregar.Text = "Agregar";
                     lblNuevaMarca.Text = "Nueva Marca:";
@@ -80,25 +78,22 @@ namespace GestorArt
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (dgvMarcas.CurrentRow != null)
-            {
-                marcaSeleccionada = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
-                txtNuevaMarca.Text = marcaSeleccionada.Descripcion;
-                lblNuevaMarca.Text = "Modificando Marca:";
-                btnAgregar.Text = "Guardar Cambios";
-            }
-            else
+            if (dgvMarcas.CurrentRow == null)
             {
                 MessageBox.Show("Seleccione una marca para modificar.");
+                return;
             }
+
+            marcaSeleccionada = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
+            txtNuevaMarca.Text = marcaSeleccionada.Descripcion;
+            lblNuevaMarca.Text = "Modificando Marca:";
+            btnAgregar.Text = "Guardar Cambios";
         }
-
-
     }
 }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Dominio
 {
     public class Imagen
@@ -10,4 +7,3 @@ namespace Dominio
         public string ImagenUrl { get; set; }
     }
 }
-

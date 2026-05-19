@@ -10,12 +10,10 @@ namespace Negocio
         {
             List<Categoria> lista = new List<Categoria>();
             AccesoDatos datos = new AccesoDatos();
-
             try
             {
-                datos.setearConsulta("SELECT Id, Descripcion FROM CATEGORIAS");
+                datos.setearConsulta("Select Id, Descripcion From CATEGORIAS");
                 datos.ejecutarLectura();
-
                 while (datos.Lector.Read())
                 {
                     Categoria aux = new Categoria();
@@ -32,7 +30,6 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
-
             return lista;
         }
 
@@ -41,7 +38,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("INSERT INTO CATEGORIAS (Descripcion, Activo) VALUES (@descripcion, 1)");
+                datos.setearConsulta("Insert into CATEGORIAS (Descripcion) values (@descripcion)");
                 datos.setearParametro("@descripcion", nueva.Descripcion);
                 datos.ejecutarAccion();
             }
@@ -55,12 +52,12 @@ namespace Negocio
             }
         }
 
-               public void modificar(Categoria categoria)
+        public void modificar(Categoria categoria)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE CATEGORIAS SET Descripcion = @descripcion WHERE Id = @id");
+                datos.setearConsulta("update CATEGORIAS set Descripcion = @descripcion Where Id = @id");
                 datos.setearParametro("@descripcion", categoria.Descripcion);
                 datos.setearParametro("@id", categoria.Id);
                 datos.ejecutarAccion();

@@ -37,7 +37,7 @@ namespace GestorArt
             this.salirToolStripMenuItem});
             this.menuStripPrincipal.Location = new System.Drawing.Point(0, 0);
             this.menuStripPrincipal.Name = "menuStripPrincipal";
-            this.menuStripPrincipal.Size = new System.Drawing.Size(902, 24);
+            this.menuStripPrincipal.Size = new System.Drawing.Size(968, 24);
             this.menuStripPrincipal.TabIndex = 1;
             this.menuStripPrincipal.Text = "menuStrip1";
             // 
@@ -80,7 +80,7 @@ namespace GestorArt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(902, 532);
+            this.ClientSize = new System.Drawing.Size(968, 532);
             this.Controls.Add(this.menuStripPrincipal);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

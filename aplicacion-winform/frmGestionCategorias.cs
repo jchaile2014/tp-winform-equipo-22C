@@ -7,13 +7,12 @@ namespace GestorArt
 {
     public partial class frmGestionCategorias : Form
     {
-        private CategoriaNegocio negocio;
-        private Categoria categoriaSeleccionada = null;
+        private CategoriaNegocio negocio = new CategoriaNegocio();
+        private Categoria categoriaSeleccionada;
 
         public frmGestionCategorias()
         {
             InitializeComponent();
-            negocio = new CategoriaNegocio();
         }
 
         private void frmGestionCategorias_Load(object sender, EventArgs e)
@@ -30,8 +29,8 @@ namespace GestorArt
         private void centrarPanel()
         {
             pnlMain.Location = new System.Drawing.Point(
-                (this.ClientSize.Width - pnlMain.Width) / 2,
-                (this.ClientSize.Height - pnlMain.Height) / 2
+                (ClientSize.Width - pnlMain.Width) / 2,
+                (ClientSize.Height - pnlMain.Height) / 2
             );
         }
 
@@ -43,20 +42,20 @@ namespace GestorArt
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtNuevaCategoria.Text))
+            {
+                MessageBox.Show("Ingrese un nombre para la categoría.");
+                return;
+            }
+
             try
             {
-                if (string.IsNullOrWhiteSpace(txtNuevaCategoria.Text))
-                {
-                    MessageBox.Show("Por favor, ingrese un nombre para la categoría.");
-                    return;
-                }
-
                 if (categoriaSeleccionada == null)
                 {
                     Categoria nueva = new Categoria();
@@ -69,7 +68,6 @@ namespace GestorArt
                     categoriaSeleccionada.Descripcion = txtNuevaCategoria.Text;
                     negocio.modificar(categoriaSeleccionada);
                     MessageBox.Show("Categoría modificada exitosamente.");
-                    
                     categoriaSeleccionada = null;
                     btnAgregar.Text = "Agregar";
                     lblNuevaCategoria.Text = "Nueva Categoría:";
@@ -80,25 +78,22 @@ namespace GestorArt
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (dgvCategorias.CurrentRow != null)
-            {
-                categoriaSeleccionada = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
-                txtNuevaCategoria.Text = categoriaSeleccionada.Descripcion;
-                lblNuevaCategoria.Text = "Modificando Categoría:";
-                btnAgregar.Text = "Guardar Cambios";
-            }
-            else
+            if (dgvCategorias.CurrentRow == null)
             {
                 MessageBox.Show("Seleccione una categoría para modificar.");
+                return;
             }
+
+            categoriaSeleccionada = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
+            txtNuevaCategoria.Text = categoriaSeleccionada.Descripcion;
+            lblNuevaCategoria.Text = "Modificando Categoría:";
+            btnAgregar.Text = "Guardar Cambios";
         }
-
-
     }
 }

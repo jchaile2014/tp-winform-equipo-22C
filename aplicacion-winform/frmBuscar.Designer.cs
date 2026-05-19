@@ -145,7 +145,6 @@ namespace GestorArt
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Buscar Artículos";
             this.Load += new System.EventHandler(this.frmBuscar_Load);
-            this.Resize += new System.EventHandler(this.frmBuscar_Resize);
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();

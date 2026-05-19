@@ -39,7 +39,7 @@ namespace GestorArt
             this.pnlMain.Controls.Add(this.btnSiguienteImagen);
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(872, 361);
+            this.pnlMain.Size = new System.Drawing.Size(912, 361);
             this.pnlMain.TabIndex = 0;
             // 
             // dgvArticulos
@@ -49,19 +49,18 @@ namespace GestorArt
             this.dgvArticulos.Location = new System.Drawing.Point(12, 12);
             this.dgvArticulos.Name = "dgvArticulos";
             this.dgvArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvArticulos.Size = new System.Drawing.Size(576, 269);
+            this.dgvArticulos.Size = new System.Drawing.Size(627, 269);
             this.dgvArticulos.TabIndex = 0;
             this.dgvArticulos.SelectionChanged += new System.EventHandler(this.dgvArticulos_SelectionChanged);
             // 
             // pbxArticulo
             // 
-            this.pbxArticulo.Location = new System.Drawing.Point(594, 12);
+            this.pbxArticulo.Location = new System.Drawing.Point(645, 12);
             this.pbxArticulo.Name = "pbxArticulo";
             this.pbxArticulo.Size = new System.Drawing.Size(264, 269);
             this.pbxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxArticulo.TabIndex = 1;
             this.pbxArticulo.TabStop = false;
-            this.pbxArticulo.Click += new System.EventHandler(this.pbxArticulo_Click);
             // 
             // btnAgregar
             // 
@@ -95,7 +94,7 @@ namespace GestorArt
             // 
             // btnAnteriorImagen
             // 
-            this.btnAnteriorImagen.Location = new System.Drawing.Point(594, 287);
+            this.btnAnteriorImagen.Location = new System.Drawing.Point(645, 287);
             this.btnAnteriorImagen.Name = "btnAnteriorImagen";
             this.btnAnteriorImagen.Size = new System.Drawing.Size(40, 23);
             this.btnAnteriorImagen.TabIndex = 5;
@@ -105,7 +104,7 @@ namespace GestorArt
             // 
             // btnSiguienteImagen
             // 
-            this.btnSiguienteImagen.Location = new System.Drawing.Point(818, 287);
+            this.btnSiguienteImagen.Location = new System.Drawing.Point(869, 287);
             this.btnSiguienteImagen.Name = "btnSiguienteImagen";
             this.btnSiguienteImagen.Size = new System.Drawing.Size(40, 23);
             this.btnSiguienteImagen.TabIndex = 6;
@@ -118,7 +117,7 @@ namespace GestorArt
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(871, 361);
+            this.ClientSize = new System.Drawing.Size(924, 361);
             this.Controls.Add(this.pnlMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

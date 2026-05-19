@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Dominio
 {
     public class Marca
@@ -10,7 +7,7 @@ namespace Dominio
 
         public override string ToString()
         {
-            return Descripcion;
+            return Descripcion ?? "";
         }
     }
 }
