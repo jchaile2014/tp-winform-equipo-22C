@@ -28,7 +28,7 @@ namespace GestorArt
             // 
             // menuStripPrincipal
             // 
-            this.menuStripPrincipal.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.menuStripPrincipal.BackColor = System.Drawing.SystemColors.MenuBar;
             this.menuStripPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.listadoDeArtToolStripMenuItem,
             this.articulosToolStripMenuItem,
@@ -44,15 +44,15 @@ namespace GestorArt
             // listadoDeArtToolStripMenuItem
             // 
             this.listadoDeArtToolStripMenuItem.Name = "listadoDeArtToolStripMenuItem";
-            this.listadoDeArtToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
-            this.listadoDeArtToolStripMenuItem.Text = "Buscar Art";
+            this.listadoDeArtToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
+            this.listadoDeArtToolStripMenuItem.Text = "Buscar Articulo";
             this.listadoDeArtToolStripMenuItem.Click += new System.EventHandler(this.listadoDeArtToolStripMenuItem_Click);
             // 
             // articulosToolStripMenuItem
             // 
             this.articulosToolStripMenuItem.Name = "articulosToolStripMenuItem";
-            this.articulosToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
-            this.articulosToolStripMenuItem.Text = "Listado de Art";
+            this.articulosToolStripMenuItem.Size = new System.Drawing.Size(118, 20);
+            this.articulosToolStripMenuItem.Text = "Listado de Articulo";
             this.articulosToolStripMenuItem.Click += new System.EventHandler(this.articulosToolStripMenuItem_Click);
             // 
             // marcasToolStripMenuItem
@@ -78,18 +78,21 @@ namespace GestorArt
             // 
             // frmPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(968, 532);
             this.Controls.Add(this.menuStripPrincipal);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStripPrincipal;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestor de Artículos";
             this.TransparencyKey = System.Drawing.Color.Black;
+            this.Load += new System.EventHandler(this.frmPrincipal_Load);
             this.menuStripPrincipal.ResumeLayout(false);
             this.menuStripPrincipal.PerformLayout();
             this.ResumeLayout(false);

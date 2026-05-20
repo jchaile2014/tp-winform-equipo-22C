@@ -184,6 +184,7 @@ namespace GestorArt
             // 
             // pbxImagen
             // 
+            this.pbxImagen.BackColor = System.Drawing.SystemColors.Window;
             this.pbxImagen.Location = new System.Drawing.Point(328, 21);
             this.pbxImagen.Name = "pbxImagen";
             this.pbxImagen.Size = new System.Drawing.Size(260, 260);

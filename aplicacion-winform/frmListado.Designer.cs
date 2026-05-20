@@ -44,6 +44,7 @@ namespace GestorArt
             // 
             // dgvArticulos
             // 
+            this.dgvArticulos.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvArticulos.Location = new System.Drawing.Point(12, 12);
@@ -55,6 +56,7 @@ namespace GestorArt
             // 
             // pbxArticulo
             // 
+            this.pbxArticulo.BackColor = System.Drawing.SystemColors.Window;
             this.pbxArticulo.Location = new System.Drawing.Point(645, 12);
             this.pbxArticulo.Name = "pbxArticulo";
             this.pbxArticulo.Size = new System.Drawing.Size(264, 269);

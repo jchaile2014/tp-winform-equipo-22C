@@ -48,5 +48,10 @@ namespace GestorArt
             ventana.MdiParent = this;
             ventana.Show();
         }
+
+        private void frmPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

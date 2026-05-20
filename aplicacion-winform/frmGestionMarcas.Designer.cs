@@ -39,6 +39,7 @@ namespace GestorArt
             // 
             // dgvMarcas
             // 
+            this.dgvMarcas.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMarcas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvMarcas.Location = new System.Drawing.Point(12, 12);
